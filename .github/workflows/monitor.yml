@@ -1,0 +1,26 @@
+
+name: Minecraft Server Status
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  check-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check and update Discord
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_CHANNEL_ID: ${{ secrets.DISCORD_CHANNEL_ID }}
+          MC_SERVER_ADDRESS: ${{ secrets.MC_SERVER_ADDRESS }}
+          STATUS_MESSAGE_ID: ${{ vars.STATUS_MESSAGE_ID }}
+        run: python3 monitor.py
+        
