@@ -53,7 +53,7 @@ def main():
                 f"• {name}" for name in player_names
             )
         else:
-            player_text = "Player names API-te paoa jayni."
+            player_text = "no player here."
 
         message = (
             f"👥 **Players Online: {online_count}**\n"
